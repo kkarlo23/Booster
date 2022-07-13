@@ -6,19 +6,20 @@ const messageFormat = (type, message) => {
 };
 
 // function that overrides global console methods with custom ones for better logging
-const consoleOverride = () => {
+const consoleOverride = (loggingLevel) => {
   const oldConsole = { ...console };
+
   console.info = (message) => {
-    oldConsole.info(messageFormat("INFO", message));
+    if (loggingLevel <= 10) oldConsole.info(messageFormat("INFO", message));
   };
   console.log = (message) => {
-    oldConsole.log(messageFormat("LOG", message));
+    if (loggingLevel <= 20) oldConsole.log(messageFormat("LOG", message));
   };
   console.warn = (message) => {
-    oldConsole.warn(messageFormat("WARN", message));
+    if (loggingLevel <= 30) oldConsole.warn(messageFormat("WARN", message));
   };
   console.error = (message) => {
-    oldConsole.error(messageFormat("ERROR", message));
+    if (loggingLevel <= 40) oldConsole.error(messageFormat("ERROR", message));
   };
 };
 
