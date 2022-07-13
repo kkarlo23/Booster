@@ -1,5 +1,4 @@
 const FIND_VEHICLE_TYPES_AGGREGATION_QUERY = (query, origin, rows, page) => {
-  console.log(query, origin, rows, page);
   // In case query is empty it omits text search and only search year (if empty defaults to current year)
   const should = [
     {

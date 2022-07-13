@@ -2,12 +2,14 @@ const express = require("express");
 const { initClient } = require("./db/connection");
 const { processArgs } = require("./helpers/helpers");
 const { initRouter } = require("./router/router");
-
+const { consoleOverride } = require("./helpers/consoleOverride");
+consoleOverride();
 const app = express();
+app.use(express.json());
 const port = 3000;
 
 const args = processArgs(process.argv);
-console.log(args);
+
 const config = JSON.parse(JSON.stringify(require(args.configPath)));
 initClient(config);
 initRouter(app);
