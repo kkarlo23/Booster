@@ -1,16 +1,16 @@
 const express = require("express");
+const cors = require("cors");
 const { initClient } = require("./db/connection");
 const { processArgs } = require("./helpers/helpers");
 const { initRouter } = require("./router/router");
-const { consoleOverride } = require("./helpers/consoleOverride");
 
 const app = express();
 app.use(express.json());
+app.use(cors());
 const port = 3000;
 
 const args = processArgs(process.argv);
 
-consoleOverride(Number(args.loggingLevel));
 const config = JSON.parse(JSON.stringify(require(args.configPath)));
 initClient(config);
 initRouter(app);
